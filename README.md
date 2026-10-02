@@ -1,273 +1,201 @@
 # SecureX — AI-Powered Alternative Credit Intelligence
 
-## Explainable AI for smarter and more inclusive credit assessment.
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20App-00C7B7?style=for-the-badge&logo=railway&logoColor=white)](https://securex.up.railway.app)
+[![API Docs](https://img.shields.io/badge/API-Swagger%20Docs-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://securex-main-production.up.railway.app/docs)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/cropiotools/Securex-main)
 
-SecureX is a full-stack AI-powered credit intelligence platform that evaluates borrower creditworthiness by combining traditional credit indicators with alternative financial behaviour.
+> **Explainable AI for smarter, fairer, and more inclusive credit assessment.**
 
-Instead of relying only on conventional credit information, SecureX incorporates UPI transaction behaviour into the assessment to generate a dynamic credit score, risk classification, default probability, loan recommendation, and explainable AI insights.
+SecureX is a full-stack AI-powered credit intelligence platform that evaluates borrower creditworthiness by combining traditional credit indicators with alternative digital financial behaviour.
 
+Instead of relying solely on conventional credit bureau records, SecureX incorporates **UPI transaction behaviour** and **bank statements** to compute dynamic credit scores, risk classifications, default probabilities, personalized loan recommendations, and transparent **SHAP Explainable AI** insights.
+
+---
+
+## 🔗 Live Deployments
+
+| Service | Platform | URL | Status |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | Railway | [https://securex.up.railway.app](https://securex.up.railway.app) | 🟢 Live |
+| **Backend FastAPI** | Railway | [https://securex-main-production.up.railway.app](https://securex-main-production.up.railway.app) | 🟢 Live |
+| **Interactive API Docs** | Swagger / OpenAPI | [https://securex-main-production.up.railway.app/docs](https://securex-main-production.up.railway.app/docs) | 🟢 Live |
+
+---
 
 ## ✨ Why SecureX?
 
-Traditional credit scoring can be limiting for individuals with limited or incomplete credit histories.
+Traditional credit scoring systems often penalize individuals with thin credit files or young borrowers. SecureX bridges this gap by evaluating:
 
-SecureX explores an alternative approach by combining:
+- **Traditional Credit Indicators:** Revolving utilization, debt-to-income ratio, past-due delinquency buckets, open credit lines, real estate loans, dependents.
+- **Digital Payment Behaviour (UPI):** Transaction frequency, total debit/credit flows, and credit-to-debit stability ratios.
+- **Explainable Machine Learning:** Real-time SHAP (SHapley Additive exPlanations) values displaying exact positive and negative drivers of each credit decision.
 
-Traditional credit indicators
-Income and debt-related information
-Payment delinquency history
-Digital payment behaviour through UPI
-Explainable machine learning
-
-The goal is to make credit assessment more data-driven, transparent, and inclusive.
-
+---
 
 ## 🚀 Key Features
+
 ### 🤖 AI Credit Risk Prediction
+A Random Forest Classifier trained on delinquency datasets predicts the probability of serious financial delinquency (`SeriousDlqin2yrs`).
 
-The platform uses a trained machine learning classification model to estimate the probability of serious financial delinquency.
+### 📊 Dynamic Credit Score (300 – 850)
+The base default probability is mapped to an industry-standard credit score (300 to 850) and dynamically adjusted using the **UPI Behaviour Score** (up to +50 points bonus/penalty adjustment).
 
-The prediction is based on factors such as:
+### 💳 UPI Behavioural Analysis
+Users upload a UPI transaction CSV to automatically extract:
 
-Credit utilization
-Debt ratio
-Monthly income
-Age
-Open credit lines
-30–59 days past due
-60–89 days past due
-90 days late
-Real estate loans
-Dependents
+| Metric | Description |
+| :--- | :--- |
+| **Transaction Count** | Total count of successful transactions |
+| **Total Transaction Volume** | Cumulative transaction amount (₹) |
+| **Average Ticket Size** | Average expenditure per transaction |
+| **Total Credits vs Debits** | Inflows vs Outflows analysis |
+| **Credit / Debit Ratio** | Cash flow sustainability index |
+| **UPI Behaviour Score** | Algorithmic financial health score (0 – 50) |
 
+### ⚠️ Risk Classification & Terms
 
-### 📊 Dynamic Credit Score
+| Credit Score | Risk Level | Est. Interest Rate |
+| :--- | :--- | :--- |
+| **740 – 850** | 🟢 Low Risk | 9.5% – 11.5% |
+| **670 – 739** | 🟡 Medium Risk | 11.5% – 14.0% |
+| **300 – 669** | 🔴 High Risk | 14.0% – 17.0% |
 
-SecureX converts the model's predicted default probability into a credit score ranging from:
+### 🧠 Explainable AI (SHAP)
+SecureX breaks the "black box" by showing exact feature impacts for every prediction:
+- 🔺 Factors increasing delinquency risk (e.g. high credit utilization, 30-59 days past due)
+- 🔻 Factors decreasing delinquency risk (e.g. older age, steady income, balanced UPI debit/credit)
 
-300 – 850
-
-The final score combines the base ML prediction with an additional UPI Behaviour Score, allowing digital financial behaviour to contribute to the assessment.
-
-
-### 💳 UPI Financial Behaviour Analysis
-
-Users can upload a UPI transaction CSV.
-
-SecureX extracts:
-
-Metric	Description
-Transaction Count	Number of successful UPI transactions
-Total Transaction Amount	Total value of transactions
-Average Transaction	Average transaction value
-Total Credits	Total incoming transaction amount
-Total Debits	Total outgoing transaction amount
-Credit/Debit Ratio	Relationship between credits and debits
-UPI Behaviour Score	Behavioural score calculated from transaction patterns
-
-Example:
-
-UPI Transactions       : 9
-Total Transactions     : ₹33,849
-Total Credits          : ₹10,500
-Total Debits           : ₹23,349
-Credit/Debit Ratio     : 2.22
-UPI Behaviour Score    : 40/50
-⚠️ Risk Assessment
-
-The generated credit score is converted into a risk category:
-
-Score	Risk
-740–850	Low Risk
-670–739	Medium Risk
-Below 670	High Risk
-
-The results page also displays:
-
-Default probability
-Model prediction
-Risk classification
-💰 Dynamic Loan Recommendation
-
-SecureX calculates a recommended loan amount using:
-
-Monthly income
-Debt ratio
-Predicted financial risk
-
-Higher debt ratios result in more conservative recommendations.
-
-📈 Risk-Based Interest Rate
-
-The recommended interest rate is dynamically determined using the predicted default probability.
-
-This creates a more personalized lending recommendation instead of displaying a fixed interest rate.
-
-🧠 Explainable AI
-
-SecureX doesn't only provide a score—it also explains why the model produced that result.
-
-The results page displays feature-level impacts such as:
-
-Credit Utilization       +0.1144
-Debt Ratio               +0.0592
-30-59 Days Past Due      +0.0492
-Age                      -0.0371
-
-Each factor is labelled according to whether it:
-
-Increased predicted default risk
-Reduced predicted default risk
-
-This improves transparency and makes the AI assessment easier to understand.
-
-📌 Global Feature Importance
-
-SecureX also displays the overall importance of features in the trained model.
-
-Example:
-
-Credit Utilization
-Debt Ratio
-Monthly Income
-Age
-90 Days Late
-30-59 Days Past Due
-Open Credit Lines
-60-89 Days Past Due
-Real Estate Loans
-Dependents
-
-This provides a broader understanding of what drives the model's decisions.
-
-🎯 AI Confidence
-
-The results page displays the model's prediction confidence along with a visual progress indicator.
-
-Example:
-
-AI Confidence: 88%
-
+---
 
 ## 🏗️ System Architecture
-                    ┌──────────────────────┐
-                    │      User Input      │
-                    │ Credit + UPI Data    │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │   Next.js Frontend   │
-                    │ React + TypeScript    │
-                    │    Tailwind CSS       │
-                    └──────────┬───────────┘
-                               │
-                         REST API Calls
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │    FastAPI Backend   │
-                    │      Python          │
-                    └──────────┬───────────┘
-                               │
-                ┌──────────────┴──────────────┐
-                │                             │
-                ▼                             ▼
-      ┌──────────────────┐          ┌──────────────────┐
-      │ Credit ML Model  │          │  UPI Processing  │
-      │   Prediction     │          │     Pandas       │
-      └────────┬─────────┘          └────────┬─────────┘
-               │                             │
-               └──────────────┬──────────────┘
-                              ▼
-                    ┌──────────────────────┐
-                    │ Combined Assessment  │
-                    └──────────┬───────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-        Credit Score       Risk Level      Loan Amount
-              │
-              ▼
-       ┌─────────────────┐
-       │ Explainable AI  │
-       │ SHAP + Feature  │
-       │   Importance    │
-       └─────────────────┘
 
+```text
+                    ┌─────────────────────────┐
+                    │       User Input        │
+                    │   Credit + UPI Data     │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │    Next.js Frontend     │
+                    │   React 19 + TypeScript │
+                    │     Tailwind CSS v4     │
+                    └────────────┬────────────┘
+                                 │
+                           REST API Calls
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │     FastAPI Backend     │
+                    │         Python          │
+                    └────────────┬────────────┘
+                                 │
+                 ┌───────────────┴───────────────┐
+                 │                               │
+                 ▼                               ▼
+       ┌───────────────────┐           ┌───────────────────┐
+       │  Credit ML Model  │           │  UPI Processing   │
+       │   Random Forest   │           │   Pandas Engine   │
+       └─────────┬─────────┘           └─────────┬─────────┘
+                 │                               │
+                 └───────────────┬───────────────┘
+                                 ▼
+                    ┌─────────────────────────┐
+                    │   Combined Assessment   │
+                    └────────────┬────────────┘
+                                 │
+               ┌─────────────────┼─────────────────┐
+               ▼                 ▼                 ▼
+          Credit Score      Risk Level        Loan Amount
+               │
+               ▼
+        ┌──────────────────┐
+        │  Explainable AI  │
+        │ SHAP Values Tree │
+        └──────────────────┘
+```
 
-## 🛠️ Technology Stack
-### Frontend
-Next.js
-React
-TypeScript
-Tailwind CSS
-
-Next.js is a React framework, and the project uses React functional components and hooks such as useState and useEffect.
-
-### Backend
-Python
-FastAPI
-Uvicorn
-
-### Machine Learning
-Scikit-learn
-Random Forest
-SHAP
-Joblib
-Data Processing
-Pandas
-NumPy
-CSV processing
-Communication
-REST APIs
-JSON
-Browser LocalStorage
-
+---
 
 ## 📁 Project Structure
+
+```text
 Securex/
-│
 ├── backend/
-│   ├── app.py
-│   ├── utils.py
-│   └── requirements.txt
+│   ├── app.py                # FastAPI server, endpoints & ML inference
+│   ├── cs-training.csv       # Delinquency training dataset
+│   ├── imputer.pkl           # Pretrained SimpleImputer model
+│   ├── Procfile              # Railway deployment start command
+│   ├── requirements.txt      # Python dependencies
+│   ├── train_model.py        # Model training and export script
+│   └── utils.py              # Helper functions
 │
 ├── frontend/
 │   ├── app/
+│   │   ├── admin/            # Underwriting portal for loan officers
 │   │   ├── api/
-│   │   │   └── predict/
-│   │   │       └── route.ts
-│   │   │
-│   │   ├── assessmment/
-│   │   │   └── page.tsx
-│   │   │
-│   │   └── results/
-│   │       └── page.tsx
-│   │
-│   └── components/
-│       └── assessment/
-│           └── UploadCard.tsx
+│   │   │   └── predict/      # Fallback Next.js API scoring route
+│   │   ├── assessment/       # Credit & UPI document upload form
+│   │   ├── dashboard/        # Borrower analytics dashboard
+│   │   ├── profile/          # User profile and linked accounts
+│   │   ├── results/          # Full credit assessment & XAI report
+│   │   ├── globals.css       # Tailwind CSS & theme tokens
+│   │   ├── layout.tsx        # Global layout & metadata
+│   │   └── page.tsx          # Landing page
+│   ├── components/
+│   │   ├── assessment/
+│   │   │   └── UploadCard.tsx
+│   │   ├── ui/               # Reusable UI primitives (Button, Card, etc.)
+│   │   ├── credit-score-gauge.tsx
+│   │   ├── dashboard-stats.tsx
+│   │   ├── glass-card.tsx
+│   │   ├── gradient-button.tsx
+│   │   └── navbar.tsx
+│   ├── lib/
+│   │   ├── mock-data.ts
+│   │   └── utils.ts
+│   ├── public/               # Logos, icons and static assets
+│   ├── package.json          # Node dependencies and scripts
+│   └── tsconfig.json         # TypeScript configuration
 │
-├── assets/
-├── database/
-├── docs/
-├── ml/
-│
-├── .gitignore
-├── package.json
-├── package-lock.json
-└── README.md
+├── .gitignore                # Production ignore rules
+└── README.md                 # Project documentation
+```
 
-The trained model file is intentionally excluded from GitHub because it exceeds GitHub's standard file-size limit.
+> **Note on Model Storage:** The primary trained model weights (`credit_model.pkl`) are hosted on Hugging Face and automatically fetched on container startup to stay within Git file-size limits.
 
+---
 
 ## 🔌 API Endpoints
-POST /predict
 
-Receives credit and financial behaviour features and generates the AI credit assessment.
+### 1. `POST /upload`
+Accepts financial documents (Bank Statement PDF and UPI transaction CSV) and extracts transaction metrics.
 
-Example Request
+**Sample Response:**
+```json
+{
+  "message": "Financial data extracted successfully",
+  "bank_statement": {
+    "filename": "bank_statement.pdf",
+    "size": 104230
+  },
+  "upi_features": {
+    "transaction_count": 9,
+    "total_transaction_amount": 33849.0,
+    "average_transaction_amount": 3761.0,
+    "total_debit": 23349.0,
+    "total_credit": 10500.0,
+    "credit_debit_ratio": 2.22,
+    "upi_behaviour_score": 40
+  }
+}
+```
+
+### 2. `POST /predict`
+Processes applicant credit factors and computed UPI behaviour score to generate full assessment.
+
+**Sample Request:**
+```json
 {
   "revolvingUtilization": 0.25,
   "age": 30,
@@ -281,127 +209,94 @@ Example Request
   "dependents": 2,
   "upiBehaviourScore": 40
 }
-Response Includes
-Credit Score
-Risk Classification
-Default Probability
-Model Prediction
-Loan Recommendation
-Interest Rate
-AI Confidence
-SHAP Explanation
-Feature Importance
-POST /upload
+```
 
-Accepts uploaded financial documents and processes the UPI transaction CSV.
-
-UPI Output
+**Sample Response:**
+```json
 {
-  "transaction_count": 9,
-  "total_transaction_amount": 33849,
-  "average_transaction_amount": 3761,
-  "total_debit": 23349,
-  "total_credit": 10500,
-  "credit_debit_ratio": 2.22,
-  "upi_behaviour_score": 40
+  "score": 752,
+  "risk": "Low Risk",
+  "confidence": 91.24,
+  "recommendation": 400000,
+  "interest_rate": 9.5,
+  "default_probability": 0.0482,
+  "model_prediction": 0,
+  "feature_importance": [
+    { "feature": "Credit Utilization", "importance": 0.2451 },
+    { "feature": "Debt Ratio", "importance": 0.1873 }
+  ],
+  "shap_explanation": [
+    { "feature": "Credit Utilization", "impact": -0.0421 },
+    { "feature": "Monthly Income", "impact": -0.0315 }
+  ]
 }
+```
 
+---
 
-## ▶️ Running the Project Locally
-1. Clone the Repository
-git clone https://github.com/siddhika40216/Securex.git
-cd Securex
-2. Backend Setup
+## 🛠️ Technology Stack
+
+- **Frontend:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Framer Motion, Recharts, Lucide Icons.
+- **Backend:** Python 3.13, FastAPI, Uvicorn, Scikit-learn, Pandas, NumPy, SHAP (TreeExplainer), Joblib.
+- **Deployment & Cloud:** Railway (Multi-service container orchestration), Hugging Face Model Hub.
+
+---
+
+## ▶️ Running Locally
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/cropiotools/Securex-main.git
+cd Securex-main
+```
+
+### 2. Backend Setup
+```bash
 cd backend
-
-Create a virtual environment:
-
 python -m venv venv
 
-Activate it on Windows:
-
+# Windows:
 venv\Scripts\activate
-
-Install dependencies:
+# Linux/macOS:
+source venv/bin/activate
 
 pip install -r requirements.txt
+uvicorn app:app --reload --port 8000
+```
+Backend runs at `http://127.0.0.1:8000` (Docs at `http://127.0.0.1:8000/docs`).
 
-Start the FastAPI server:
-
-uvicorn app:app --reload
-
-The backend will run at:
-
-http://127.0.0.1:8000
-
-Swagger API documentation:
-
-http://127.0.0.1:8000/docs
-3. Frontend Setup
-
-Open another terminal:
-
+### 3. Frontend Setup
+```bash
 cd frontend
-
-Install dependencies:
-
 npm install
-
-Start the development server:
-
 npm run dev
+```
+Frontend runs at `http://localhost:3000`.
 
-Open:
+---
 
-http://localhost:3000
+## 🚀 Railway Deployment Guide
 
+This project is deployed on Railway using a **2-service monorepo structure**:
 
-## 🔐 Model File
+1. **Backend Service:**
+   - **Root Directory:** `/backend`
+   - **Start Command:** Detected automatically from `Procfile` (`uvicorn app:app --host 0.0.0.0 --port $PORT`)
+   - **Target Port:** `8000` / `$PORT`
 
-The trained machine learning model is stored separately from the Git repository because the model file is larger than GitHub's standard 100 MB file limit.
+2. **Frontend Service:**
+   - **Root Directory:** `/frontend`
+   - **Target Port:** `3000`
+   - **Environment Variables:**
+     - `PORT` = `3000`
+     - `HOSTNAME` = `0.0.0.0`
+     - `NEXT_PUBLIC_API_URL` = `https://securex-main-production.up.railway.app`
 
-For deployment, the model should be stored using an appropriate model-storage solution or Git LFS.
-
-
-## 🌱 Future Scope
-
-SecureX can be extended with:
-
-Utility bill payment history
-Detailed savings-pattern analysis
-More alternative financial data sources
-Bank account transaction categorization
-Automated income consistency analysis
-Personalized financial improvement recommendations
-Real-time model monitoring
-Secure cloud-based model storage
-Fairness and bias monitoring
-Model retraining pipelines
-Mobile application support
-
-
-## 🎯 Project Objective
-
-Traditional credit scoring can limit access to financial services for individuals with limited or incomplete credit histories.
-
-SecureX explores an alternative approach by combining conventional credit indicators with digital financial behaviour.
-
-The objective is to support more inclusive, explainable, and data-driven lending decisions.
-
+---
 
 ## ⚠️ Disclaimer
+SecureX is a prototype developed for demonstrating machine learning, financial data processing, explainable AI, and full-stack architecture. The outputs generated should not be considered formal financial or lending advice.
 
-SecureX is an academic and prototype project intended for demonstrating machine learning, financial data analysis, explainable AI, and full-stack application development.
+---
 
-The predictions and recommendations generated by the system should not be considered professional financial or lending advice.
-
-
-## 👩‍💻 Author
-
-Siddhika Srivastava
-
-B.Tech Computer Science
-Banasthali Vidyapith
-
-
-⭐ If you find this project interesting, consider giving the repository a star.
+⭐ If you find this project interesting, consider starring the repository!
